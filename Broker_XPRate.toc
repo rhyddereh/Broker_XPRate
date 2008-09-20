@@ -1,0 +1,25 @@
+## Title: Broker_XPRate
+## Notes: LDB Plugin showing availible skills
+## Author: Rodrick
+## X-eMail: d DOT mangus AT gmail DOT com
+## X-Website: http://guild.requiemtech.com/
+
+## Interface: 20400
+## Version: @project-version@
+
+## DefaultState: enabled
+## LoadOnDemand: 0
+## SavedVariables: Broker_XPRateDB
+## SavedVariablesPerCharacter: Broker_XPRateDBPC
+## OptionalDeps: Ace3
+## X-Embeds: Ace3
+## X-Category: 
+## X-License: GPL v2 or later
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+
+embeds.xml
+locales\locales.xml
+
+Core.lua
