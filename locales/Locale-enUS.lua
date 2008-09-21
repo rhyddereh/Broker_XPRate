@@ -8,3 +8,5 @@ L["%s kills to level"] = true
 L["%s to level"] = true
 L["LEFT-CLICK to toggle text options"] = true
 L["CTRL-CLICK to reset session"] = true
+L["Combat Message Search String"] = "(.+) dies, you gain (%d+) experience"
+L["Combat Message Rested Search String"] = "%+(%d+) exp Rested bonus"
