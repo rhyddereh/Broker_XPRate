@@ -22,7 +22,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
 local frame = CreateFrame("frame")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local dataobj = ldb:NewDataObject("Broker_XPRate", {
-    icon = "Interface\\Icons\\INV_Misc_Coin_02",
+    icon = "Interface\\Icons\\INV_Misc_Gem_Pearl_04",
     OnClick = function(clickedframe, button)
         InterfaceOptionsFrame_OpenToFrame(Broker_XPRate.optionsframe)
     end,
