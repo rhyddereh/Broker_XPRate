@@ -1,5 +1,5 @@
 ## Title: Broker_XPRate
-## Notes: LDB Plugin showing availible skills
+## Notes: LDB Plugin showing time to level and kills to level
 ## Author: Rodrick
 ## X-eMail: d DOT mangus AT gmail DOT com
 ## X-Website: http://guild.requiemtech.com/
