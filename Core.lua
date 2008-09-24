@@ -22,7 +22,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
 local frame = CreateFrame("frame")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local dataobj = ldb:NewDataObject("Broker_XPRate", {
-    icon = "Interface\\Icons\\INV_Misc_Gem_Pearl_04",
+    icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
     OnClick = function(clickedframe, button)
         InterfaceOptionsFrame_OpenToFrame(Broker_XPRate.optionsframe)
     end,
@@ -79,23 +79,28 @@ local function GetKillsToLevel()
 	end
 end
 
-function dataobj:OnEnter()	tipshown = self
+local function returncolored(string,color)
+	return "|cFF" .. color .. string .. "|r"
+end
+
+function dataobj:OnEnter()
+	tipshown = self
  	GameTooltip:SetOwner(self, "ANCHOR_NONE")
 	GameTooltip:SetPoint(GetTipAnchor(self))
 	GameTooltip:ClearLines()
 	
 	GameTooltip:AddLine("Broker_XPRate")
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddDoubleLine(L["XP till next level:"], difftilllevel, 1,1,1, 1,1,1)
+	GameTooltip:AddDoubleLine(L["XP till next level:"], difftilllevel, 0,1,0, 0,1,0)
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddDoubleLine(L["XP per hour:"] , round(GetAvgXP()*3600,0), 1,1,1, 1,1,1)
-	GameTooltip:AddDoubleLine(L["XP per kill:"], round(xpperkill, 0), 1,1,1, 1,1,1)
+	GameTooltip:AddDoubleLine(L["XP per hour:"] , round(GetAvgXP()*3600,0), 0,1,0, 0,1,0)
+	GameTooltip:AddDoubleLine(L["XP per kill:"], round(xpperkill, 0), 0,1,0, 0,1,0)
 	GameTooltip:AddLine(" ")
 	GameTooltip:AddLine(string.format(L["%s time to level"], GetTimeToLevel()))
 	GameTooltip:AddLine(string.format(L["%s kills to level"], GetKillsToLevel()))
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine(L["LEFT-CLICK to toggle text options"])
-	GameTooltip:AddLine(L["CTRL-CLICK to reset session"])
+	GameTooltip:AddLine(returncolored(L["Click: "], "6ab950") .. returncolored(L["Toggles text options"], "eeeeee"))
+	GameTooltip:AddLine(returncolored(L["Ctrl + Click: "], "6ab950") .. returncolored(L["Resets session"], "eeeeee"))
     
 	GameTooltip:Show()
 end
@@ -154,6 +159,7 @@ function Broker_XPRate:PLAYER_XP_UPDATE()
 end
 
 function Broker_XPRate:CHAT_MSG_COMBAT_XP_GAIN(_, combat_string)
+	self.db.profile.lastcombatline = combat_string
 	local name,xp,rxp
 	_,_,name,xp = string.find(combat_string, L["Combat Message Search String"])
 	_,_,rxp = string.find(combat_string, L["Combat Message Rested Search String"])
@@ -213,6 +219,7 @@ function Broker_XPRate:OnInitialize()
     self.db:RegisterDefaults({
         profile = {
 			display = 1,
+			lastcombatline = ''
         },
 		char = {
 			history = {}
