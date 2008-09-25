@@ -23,9 +23,6 @@ local frame = CreateFrame("frame")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local dataobj = ldb:NewDataObject("Broker_XPRate", {
     icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
-    OnClick = function(clickedframe, button)
-        InterfaceOptionsFrame_OpenToFrame(Broker_XPRate.optionsframe)
-    end,
 })
 
 local function round(num, idp)
