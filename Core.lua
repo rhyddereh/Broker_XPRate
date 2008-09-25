@@ -16,6 +16,7 @@ local difftilllevel = 0
 local lasttotal = 0
 local tipshown
 local xpperkill = 0
+local totalkills = 0
 
 Broker_XPRate = LibStub("AceAddon-3.0"):NewAddon("Broker_XPRate", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
@@ -50,8 +51,11 @@ local function GetTipAnchor(frame)
 end
 
 local function GetAvgXP()
-	if totalgained == 0 then return 0 end
 	return totalgained/(time() - starttime)
+end
+
+local function GetKillsPerHour()
+	return totalkills/(time() - starttime)
 end
 
 local function UpdateDifftilllevel()
@@ -60,8 +64,13 @@ end
 
 local function GetTimeToLevel()
 	local avg = GetAvgXP()
+	local restedleft = GetXPExhaustion() or 0
+	if restedleft >= difftilllevel then restedleft = difftilllevel end
 	if avg == 0 then return "~" end
-	local ttl = 1/(GetAvgXP()/difftilllevel)
+	local ttl = difftilllevel/avg
+	if (restedleft > 0) then
+		ttl = ttl - ((GetKillsPerHour()*xpperkill)/(restedleft/(GetKillsPerHour()*xpperkill*2)))
+	end
 	return formattime(ttl)
 end
 
@@ -113,6 +122,7 @@ local function resetsession()
 	Broker_XPRate.db.char.history = {}
 	xpperkill = 0
 	restedxpperkill = 0
+	totalkills = 0
 	Broker_XPRate:Print("Session reset")
 end
 
@@ -163,6 +173,7 @@ function Broker_XPRate:CHAT_MSG_COMBAT_XP_GAIN(_, combat_string)
 	if (not xp) then return end -- stop if we didn't find the xp gained
 	rxp = rxp or 0
 	xp = xp - rxp
+	totalkills = totalkills + 1
 	table.insert(self.db.char.history,1, {
 					["name"] = name,
 					["xp"] = tonumber(xp),
