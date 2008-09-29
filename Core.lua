@@ -23,6 +23,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
 local frame = CreateFrame("frame")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local dataobj = ldb:NewDataObject("Broker_XPRate", {
+    type = "data source",
     icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
 })
 
