@@ -6,6 +6,17 @@
 	Credit to Laughlorien and KillMeterFu for some of the per kill code           
 ------------------------------------------------------------------------------------]]
 
+local expansionlevel = GetAccountExpansionLevel()
+if not MAX_LEVEL and expansionlevel == 1 then
+	MAX_LEVEL = 60
+elseif not MAX_LEVEL and expansionlevel == 2 then
+	MAX_LEVEL = 70
+elseif not MAX_LEVEL and expansionlevel == 3 then
+	MAX_LEVEL = 80
+elseif not MAX_LEVEL then --unknown expansionlevel so no idea but we don't want ppl to hit it
+	MAX_LEVEL = 255
+end
+
 local UPDATEPERIOD = 1
 local keeplast = 12
 
@@ -17,6 +28,7 @@ local lasttotal = 0
 local tipshown
 local xpperkill = 0
 local totalkills = 0
+local playerlevel = 0
 
 Broker_XPRate = LibStub("AceAddon-3.0"):NewAddon("Broker_XPRate", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
@@ -26,6 +38,23 @@ local dataobj = ldb:NewDataObject("Broker_XPRate", {
     type = "data source",
     icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
 })
+
+local function checklevel(level)
+	if not level then
+		level = playerlevel
+	else
+		playerlevel = level
+	end
+	if playerlevel >= MAX_LEVEL then
+		dataobj.icon = nil
+		dataobj.text = nil
+		dataobj.OnEnter = nil
+		dataobj.OnClick = nil
+		dataobj.OnLeave = nil
+		frame:SetScript("OnUpdate", nil)
+		Broker_XPRate:UnregisterAllEvents()
+	end
+end
 
 local function round(num, idp)
 	local mult = 10^(idp or 2)
@@ -166,6 +195,10 @@ function Broker_XPRate:PLAYER_XP_UPDATE()
 	totalgained = totalgained + GetDiff()
 end
 
+function Broker_XPRate:PLAYER_LEVEL_UP(newlevel)
+	checklevel(newlevel)
+end
+
 function Broker_XPRate:CHAT_MSG_COMBAT_XP_GAIN(_, combat_string)
 	self.db.profile.lastcombatline = combat_string
 	local name,xp,rxp
@@ -237,9 +270,12 @@ function Broker_XPRate:OnInitialize()
 end
 
 function Broker_XPRate:OnEnable()
+	playerlevel = UnitLevel("player")
 	starttime = time() --save timestamp of when enabled
 	lasttotal = UnitXP("player")
 	UpdateDifftilllevel()
 	self:RegisterEvent("PLAYER_XP_UPDATE")
 	self:RegisterEvent("CHAT_MSG_COMBAT_XP_GAIN")
+	self:RegisterEvent("PLAYER_LEVEL_UP")
+	checklevel()
 end
