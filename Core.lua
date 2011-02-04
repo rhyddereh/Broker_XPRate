@@ -47,7 +47,7 @@ local function checklevel(level)
 	else
 		playerlevel = level
 	end
-	if playerlevel >= MAX_LEVEL then
+	if tonumber(playerlevel) >= tonumber(MAX_LEVEL) then
 		dataobj.icon = nil
 		dataobj.text = nil
 		dataobj.OnEnter = nil
