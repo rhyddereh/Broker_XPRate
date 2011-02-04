@@ -1,25 +1,26 @@
-## Title: Broker_XPRate
-## Notes: LDB Plugin showing time to level and kills to level
-## Author: Rodrick
-## X-eMail: d DOT mangus AT gmail DOT com
-## X-Website: http://guild.requiemtech.com/
-
 ## Interface: 40000
+## Title: Broker_XPRate
 ## Version: @project-version@
+## Revision: @project-date-integer@
+## Author: @project-author@
+## X-Date: @project-date-iso@
+## Notes: LDB Plugin showing time to level and kills to level
+## X-Category: 
+## X-License: GPL v2 or later
 
 ## DefaultState: enabled
 ## LoadOnDemand: 0
 ## SavedVariables: Broker_XPRateDB
 ## SavedVariablesPerCharacter: Broker_XPRateDBPC
 ## OptionalDeps: Ace3
-## X-Embeds: Ace3
-## X-Category: 
-## X-License: GPL v2 or later
 
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed
 
+#@no-lib-strip@
 embeds.xml
+#@end-no-lib-strip@
+
 locales\locales.xml
 
 Core.lua
