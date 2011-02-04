@@ -1,11 +1,12 @@
 package-as: Broker_XPRate
 
 externals:
-   libs/AceAddon-3.0: http://svn.wowace.com/wowace/trunk/Ace3/AceAddon-3.0
-   libs/AceConsole-3.0: http://svn.wowace.com/wowace/trunk/Ace3/AceConsole-3.0
-   libs/AceDB-3.0: http://svn.wowace.com/wowace/trunk/Ace3/AceDB-3.0
-   libs/AceEvent-3.0: http://svn.wowace.com/wowace/trunk/Ace3/AceEvent-3.0
-   libs/AceLocale-3.0: http://svn.wowace.com/wowace/trunk/Ace3/AceLocale-3.0
-   libs/LibStub: http://svn.wowace.com/wowace/trunk/Ace3/LibStub
-   libs/CallbackHandler-1.0: http://svn.wowace.com/wowace/trunk/Ace3/CallbackHandler-1.0
+   libs/AceAddon-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
+   libs/AceConsole-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
+   libs/AceDB-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
+   libs/AceEvent-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+   libs/AceLocale-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
+   libs/LibStub: svn://svn.wowace.com/wow/libstub/mainline/tags/1.0
+   libs/CallbackHandler-1.0: svn://svn.wowace.com/wow/callbackhandler/mainline/tags/1.0.3/CallbackHandler-1.0
    libs/LibDataBroker-1.1: git://github.com/tekkub/libdatabroker-1-1.git
+  
