@@ -12,7 +12,9 @@ if not MAX_LEVEL and expansionlevel == 1 then
 elseif not MAX_LEVEL and expansionlevel == 2 then
 	MAX_LEVEL = 70
 elseif not MAX_LEVEL and expansionlevel == 3 then
-	MAX_LEVEL = 80
+ MAX_LEVEL = 80
+elseif not MAX_LEVEL and expansionlevel == 4 then
+ MAX_LEVEL = 85
 elseif not MAX_LEVEL then --unknown expansionlevel so no idea but we don't want ppl to hit it
 	MAX_LEVEL = 255
 end
