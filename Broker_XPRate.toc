@@ -4,7 +4,7 @@
 ## X-eMail: d DOT mangus AT gmail DOT com
 ## X-Website: http://guild.requiemtech.com/
 
-## Interface: 20400
+## Interface: 40000
 ## Version: @project-version@
 
 ## DefaultState: enabled
