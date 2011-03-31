@@ -36,10 +36,12 @@ Broker_XPRate = LibStub("AceAddon-3.0"):NewAddon("Broker_XPRate", "AceConsole-3.
 local L = LibStub("AceLocale-3.0"):GetLocale("Broker_XPRate")
 local frame = CreateFrame("frame")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
-local dataobj = ldb:NewDataObject("Broker_XPRate", {
-    type = "data source",
-    icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
-})
+if not checklevel()
+  local dataobj = ldb:NewDataObject("Broker_XPRate", {
+      type = "data source",
+      icon = "Interface\\Icons\\Inv_Misc_SummerFest_BrazierOrange",
+  })
+end
 
 local function checklevel(level)
 	if not level then
@@ -55,7 +57,9 @@ local function checklevel(level)
 		dataobj.OnLeave = nil
 		frame:SetScript("OnUpdate", nil)
 		Broker_XPRate:UnregisterAllEvents()
+		return false
 	end
+	return true
 end
 
 local function round(num, idp)
