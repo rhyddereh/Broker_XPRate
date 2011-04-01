@@ -7,15 +7,15 @@
 ------------------------------------------------------------------------------------]]
 
 local expansionlevel = GetAccountExpansionLevel()
-if not MAX_LEVEL and expansionlevel == 1 then
+if expansionlevel == 0 then
 	MAX_LEVEL = 60
-elseif not MAX_LEVEL and expansionlevel == 2 then
+elseif expansionlevel == 1 then
 	MAX_LEVEL = 70
-elseif not MAX_LEVEL and expansionlevel == 3 then
+elseif expansionlevel == 2 then
  MAX_LEVEL = 80
-elseif not MAX_LEVEL and expansionlevel == 4 then
+elseif expansionlevel == 3 then
  MAX_LEVEL = 85
-elseif not MAX_LEVEL then --unknown expansionlevel so no idea but we don't want ppl to hit it
+else --unknown expansionlevel so no idea but we don't want ppl to hit it
 	MAX_LEVEL = 255
 end
 
@@ -198,8 +198,9 @@ local function setup()
 		totalgained = totalgained + functions.GetDiff()
 	end
 
-	function Broker_XPRate:PLAYER_LEVEL_UP(newlevel)
-		checklevel(newlevel)
+	function Broker_XPRate:PLAYER_LEVEL_UP()
+		playerlevel = playerlevel + 1
+		checklevel(playerlevel)
 	end
 
 	function Broker_XPRate:CHAT_MSG_COMBAT_XP_GAIN(_, combat_string)
