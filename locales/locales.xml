@@ -2,5 +2,6 @@
 
     <Script file="Locale-enUS.lua" />
     <Script file="Locale-deDE.lua" />
+    <Script file="Locale-frFR.lua" />
 
 </Ui>
